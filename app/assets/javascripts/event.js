@@ -3,5 +3,10 @@ var app = angular.module('events', ['ngResource'])
         return $resource('/events/:id');
     }])
     .controller('MainCtrl', ['$scope', 'eventService', function($scope, eventService) {
-        $scope.events = eventService.query();
+
+        $scope.reload = function() {
+            $scope.events = eventService.query();
+        };
+
+        $scope.reload();
     }]);
