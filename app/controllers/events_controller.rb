@@ -1,8 +1,12 @@
-class EventController < ApplicationController
+class EventsController < ApplicationController
 
-  skip_before_filter :verify_authenticity_token, :only => [:receive]
+  skip_before_filter :verify_authenticity_token, :only => [ :create ]
 
-  def receive
+  def index
+    render json: Event.all
+  end
+
+  def create
     event = Simplify::Event.create({'payload' => request.raw_post})
     event_model = Event.new
     event_model.name = event['name']
@@ -10,9 +14,5 @@ class EventController < ApplicationController
     event_model.save
 
     render text: event.to_s
-  end
-
-  def list
-    render json: Event.all
   end
 end

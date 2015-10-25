@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  post 'event' => 'event#receive'
-  get 'events' => 'event#list'
+  root 'home#index'
+  resources :events
 end
